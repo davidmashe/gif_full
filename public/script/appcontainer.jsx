@@ -7,7 +7,7 @@ export default React.createClass({
     return (
       <div>
         <GifForm />
-        <GifDisplay />
+        <GifDisplay images={this.props.images}/>
       </div>
     );
   }

@@ -98,7 +98,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_appcontainer2.default, null), document.getElementById("react-entry"));
+	_reactDom2.default.render(_react2.default.createElement(_appcontainer2.default, {
+	  images: ["https://media.giphy.com/media/3oEjHERZtBVgoMV5C0/giphy.gif"] }), document.getElementById("react-entry"));
 
 /***/ },
 /* 3 */
@@ -20400,7 +20401,7 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(_gifform2.default, null),
-	      _react2.default.createElement(_gifdisplay2.default, null)
+	      _react2.default.createElement(_gifdisplay2.default, { images: undefined.props.images })
 	    );
 	  }
 	});
@@ -20409,7 +20410,7 @@
 /* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -20422,10 +20423,15 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'gifform',
+	  displayName: "gifform",
 
 	  render: function render() {
-	    return _react2.default.createElement('div', null);
+	    return _react2.default.createElement(
+	      "form",
+	      null,
+	      _react2.default.createElement("input", { type: "text", placeholder: "search for a gif, bruh" }),
+	      _react2.default.createElement("input", { type: "submit", vaue: "GIF IT UP" })
+	    );
 	  }
 	});
 
@@ -20449,7 +20455,13 @@
 	  displayName: 'gifdisplay',
 
 	  render: function render() {
-	    return _react2.default.createElement('div', null);
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      undefined.props.images.map(function (result) {
+	        return _react2.default.createElement('img', { src: result });
+	      })
+	    );
 	  }
 	});
 
