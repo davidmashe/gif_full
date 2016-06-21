@@ -98,8 +98,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_appcontainer2.default, {
-	  images: ["https://media.giphy.com/media/3oEjHERZtBVgoMV5C0/giphy.gif"] }), document.getElementById("react-entry"));
+	// ReactDOM.render(<AppContainer
+	//   images={["https://media.giphy.com/media/3oEjHERZtBVgoMV5C0/giphy.gif"]} />,
+	//   document.getElementById("react-entry"));
+
+	_reactDom2.default.render(_react2.default.createElement(_appcontainer2.default, null), document.getElementById("react-entry"));
 
 /***/ },
 /* 3 */
@@ -20391,17 +20394,36 @@
 
 	var _gifdisplay2 = _interopRequireDefault(_gifdisplay);
 
+	var _constants = __webpack_require__(173);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'appcontainer',
 
+	  getInitialState: function getInitialState() {
+	    return { images: ["https://media4.giphy.com/media/o0vwzuFwCGAFO/200w.gif"] };
+	  },
+	  makeApiCall: function makeApiCall(searchTerm) {
+	    var searchTerm = object.searched.split(" ").join("+"); // make the search term URL friendly
+	    var url = _constants.Prefix + searchTerm + _constants.Suffix;
+	    AJAX.get(url, this.onGiphyResponse);
+	  },
+	  onGiphyResponse: function onGiphyResponse(response) {
+	    var resultsArray = JSON.parse(string).data;
+	    var displayArray = [];
+	    var maxIterations = resultsArray.length > 5 ? 5 : resultsArray.length;
+	    for (var i = 0; i < maxIterations; i++) {
+	      displayArray.push(resultsArray[i].images.original.url);
+	    }
+	    this.setState({ images: displayArray });
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(_gifform2.default, null),
-	      _react2.default.createElement(_gifdisplay2.default, { images: undefined.props.images })
+	      _react2.default.createElement(_gifdisplay2.default, { images: this.state.images })
 	    );
 	  }
 	});
@@ -20439,7 +20461,7 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -20452,18 +20474,35 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'gifdisplay',
+	  displayName: "gifdisplay",
 
 	  render: function render() {
 	    return _react2.default.createElement(
-	      'div',
+	      "div",
 	      null,
-	      undefined.props.images.map(function (result) {
-	        return _react2.default.createElement('img', { src: result });
+	      this.props.images.map(function (result) {
+	        return _react2.default.createElement("img", { src: result, key: "" });
 	      })
-	    );
+	    )
+	    // <img src={this.props.images} />
+	    ;
 	  }
 	});
+
+/***/ },
+/* 173 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var Prefix = "http://api.giphy.com/v1/gifs/search?q=";
+	var Suffix = "&api_key=dc6zaTOxFJmzC";
+
+	exports.default = Prefix;
+	exports.default = Suffix;
 
 /***/ }
 /******/ ]);
