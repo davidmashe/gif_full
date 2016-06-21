@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default React.createClass({
-  render : ()=>{
+  render : function(){
     return (
       <div>
         {this.props.images.map(function(result) {

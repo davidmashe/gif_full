@@ -3,11 +3,14 @@ import GifForm from './gifform.jsx';
 import GifDisplay from './gifdisplay.jsx';
 
 export default React.createClass({
-  render : ()=>{
+  getInitialState: function() {
+    return {images: ["https://media.giphy.com/media/3oEjHERZtBVgoMV5C0/giphy.gif"]};
+  },
+  render : function(){
     return (
       <div>
         <GifForm />
-        <GifDisplay images={this.props.images}/>
+        <GifDisplay images={this.state.images}/>
       </div>
     );
   }

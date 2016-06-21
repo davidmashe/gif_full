@@ -98,8 +98,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_appcontainer2.default, {
-	  images: ["https://media.giphy.com/media/3oEjHERZtBVgoMV5C0/giphy.gif"] }), document.getElementById("react-entry"));
+	_reactDom2.default.render(_react2.default.createElement(_appcontainer2.default, null), document.getElementById("react-entry"));
 
 /***/ },
 /* 3 */
@@ -210,6 +209,11 @@
 	// shim for using process in browser
 
 	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it don't break things.
+	var cachedSetTimeout = setTimeout;
+	var cachedClearTimeout = clearTimeout;
+
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -234,7 +238,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -251,7 +255,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -263,7 +267,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -20396,12 +20400,15 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'appcontainer',
 
+	  getInitialState: function getInitialState() {
+	    return { images: ["https://media.giphy.com/media/3oEjHERZtBVgoMV5C0/giphy.gif"] };
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(_gifform2.default, null),
-	      _react2.default.createElement(_gifdisplay2.default, { images: undefined.props.images })
+	      _react2.default.createElement(_gifdisplay2.default, { images: this.state.images })
 	    );
 	  }
 	});
@@ -20458,7 +20465,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      undefined.props.images.map(function (result) {
+	      this.props.images.map(function (result) {
 	        return _react2.default.createElement('img', { src: result });
 	      })
 	    );
