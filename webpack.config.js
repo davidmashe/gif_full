@@ -1,5 +1,5 @@
 module.exports = {
- entry: ["./public/dependency/ajax.js" , "./public/script/app.jsx"],
+entry: "./public/script/app.jsx",
  output: {
    filename: "public/bundle.js"
  },
