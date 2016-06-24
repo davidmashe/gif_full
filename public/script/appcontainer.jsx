@@ -18,6 +18,10 @@ export default React.createClass({
     console.log("url is: " + url);
     AJAX.get(url,this.onGiphyResponse);
   },
+  focusImage : function(object){
+    console.log("focusing image, bruh, on",object);
+    this.setState({previewImages: [],imageObject:this.state.imageobjects,focusImage:object});
+  },
   onGiphyResponse : function(response){
     var resultsArray = JSON.parse(response).data;
     console.log("results array:",resultsArray);
@@ -32,7 +36,7 @@ export default React.createClass({
     return (
       <div>
         <GifForm propagate={this.makeApiCall} />
-        <GifDisplay images={this.state.previewImages} />
+        <GifDisplay images={this.state.previewImages} propagateImageClick={this.focusImage}/>
       </div>
     );
   }

@@ -7,8 +7,7 @@ export default React.createClass({
   //   return {images:this.props.images};
   // },
   handleImageClick : function(event) {
-    console.log(event.target);
-    // this.props.propagateImageClick(event.target);
+    this.props.propagateImageClick(event.target.src);
   },
   render : function(){
     return (
