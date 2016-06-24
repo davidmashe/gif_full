@@ -6,8 +6,9 @@ export default React.createClass({
   // getInitialState : function() {
   //   return {images:this.props.images};
   // },
-  handleImageClick : function() {
-    console.log("she wurkin dog");
+  handleImageClick : function(event) {
+    console.log(event.target);
+    // this.props.propagateImageClick(event.target);
   },
   render : function(){
     return (
