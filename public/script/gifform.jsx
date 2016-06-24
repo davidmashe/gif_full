@@ -15,8 +15,8 @@ export default React.createClass({
   render : function(){
     return (
       <form onSubmit={this.propagate}>
-        <input type="text" placeholder="search for a gif, bruh" onChange={this.handleClick} />
-        <input type="submit" value="GIF IT UP"/>
+        <input className="form-text" type="text" placeholder="search for a gif, bruh" onChange={this.handleClick} />
+        <input className="form-button" type="submit" value="GIF IT UP"/>
       </form>
 
       // <form onSubmit={this.propagate}>

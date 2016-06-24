@@ -20436,8 +20436,8 @@
 	    return _react2.default.createElement(
 	      'form',
 	      { onSubmit: this.propagate },
-	      _react2.default.createElement('input', { type: 'text', placeholder: 'search for a gif, bruh', onChange: this.handleClick }),
-	      _react2.default.createElement('input', { type: 'submit', value: 'GIF IT UP' })
+	      _react2.default.createElement('input', { className: 'form-text', type: 'text', placeholder: 'search for a gif, bruh', onChange: this.handleClick }),
+	      _react2.default.createElement('input', { className: 'form-button', type: 'submit', value: 'GIF IT UP' })
 	    )
 
 	    // <form onSubmit={this.propagate}>
@@ -56367,15 +56367,17 @@
 	  // getInitialState : function() {
 	  //   return {images:this.props.images};
 	  // },
-	  handleClick: function handleClick() {
+	  handleImageClick: function handleImageClick() {
 	    console.log("she wurkin dog");
 	  },
 	  render: function render() {
+	    var _this = this;
+
 	    return _react2.default.createElement(
 	      "div",
 	      { className: "img-div" },
 	      this.props.images.map(function (currentValue, index, originalArray) {
-	        return _react2.default.createElement("img", { src: currentValue, key: index, className: "gif-frame" });
+	        return _react2.default.createElement("img", { src: currentValue, key: index, className: "gif-frame", onClick: _this.handleImageClick });
 	      })
 	    );
 	  }
