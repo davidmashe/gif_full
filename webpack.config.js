@@ -1,5 +1,4 @@
 module.exports = {
- // entry: ["./public/script/ajax.js" , "./public/script/app.jsx"],
 entry: "./public/script/app.jsx",
  output: {
    filename: "public/bundle.js"
