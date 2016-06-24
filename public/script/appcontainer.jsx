@@ -33,11 +33,22 @@ export default React.createClass({
     this.setState({previewImages:displayArray,imageObjects:resultsArray});
   },
   render : function(){
-    return (
-      <div>
-        <GifForm propagate={this.makeApiCall} />
-        <GifDisplay images={this.state.previewImages} propagateImageClick={this.focusImage}/>
-      </div>
-    );
+    if (this.state.focusImage){
+      return (
+        <div>
+          <GifForm propagate={this.makeApiCall} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <GifForm propagate={this.makeApiCall} />
+          <GifDisplay images={this.state.previewImages} propagateImageClick={this.focusImage}/>
+        </div>
+      );
+    }
+
   }
 });
+
+          // <BigImage image={this.state.focusImage} />
