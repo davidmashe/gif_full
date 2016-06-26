@@ -34,6 +34,9 @@ export default React.createClass({
   getUrl : function(object){
     return object.images.fixed_height.url;
   },
+  unFocusImage : function(){
+    this.setState({imageObjects:this.state.imageObjects,focusImage:null});
+  },
   onGiphyResponse : function(response){
     var resultsArray = JSON.parse(response).data;
     var displayArray = [];
@@ -48,7 +51,8 @@ export default React.createClass({
         <div>
           <GifForm propagate={this.makeApiCall} />
           <GifDisplay images={this.state.previewImages} focusImage={this.state.focusImage}
-            propagateImageClick={this.focusImage} imageObjects={this.state.imageObjects}/>
+            propagateImageClick={this.focusImage} imageObjects={this.state.imageObjects}
+            unFocusImage={this.unFocusImage}/>
         </div>
       );
   }

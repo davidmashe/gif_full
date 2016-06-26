@@ -3,6 +3,11 @@
   margin-left: 5px;
   box-shadow: 10px 10px 5px #888888;
 }
+.gif-frame:hover{
+  border: 2px solid white;
+  /*margin-left: 5px;*/
+  box-shadow: 10px 10px 5px #888888;
+}
 .img-div {
   margin-top: 20px;
 }
@@ -20,6 +25,4 @@ input[type=submit] {
   margin-left: 10px;
   height: 40px;
   width: 250px;
-}
-.focusGif {
 }

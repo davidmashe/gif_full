@@ -10,7 +10,7 @@ export default React.createClass({
     this.props.propagateImageClick(event.target.src);
   },
   unFocusGif : function(){
-
+    this.props.unFocusImage();
   },
   getSmallGif(object){
     return object.images.fixed_height.url;
@@ -23,7 +23,7 @@ export default React.createClass({
       // match the focus url to a gif Object, get a bigger gif url from that object
       return (
         <div className="img-div">
-          <img src={this.getBigGif(this.props.focusImage)} className="focus-gif"
+          <img src={this.getBigGif(this.props.focusImage)} className="gif-frame"
             onClick={this.unFocusGif} />
         </div>
       );

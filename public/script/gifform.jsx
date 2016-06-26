@@ -15,16 +15,11 @@ export default React.createClass({
   render : function(){
     return (
       <form onSubmit={this.propagate}>
-        <input className="form-component" id="gif-text" 
+        <input className="form-component" id="gif-text"
           type="text" placeholder="search for a gif, bruh" onChange={this.handleClick} />
         <input className="form-component" id="gif-submit"
           type="submit" value="GIF IT UP"/>
       </form>
-
-      // <form onSubmit={this.propagate}>
-      //   <TextField type="text" placeholder="search for a gif, bruh" onChange={this.handleClick} />
-      //   <RaisedButton type="submit" label="GIF IT UP" />
-      // </form>
 
     );
   }
