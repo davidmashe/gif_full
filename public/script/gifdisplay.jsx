@@ -23,7 +23,7 @@ export default React.createClass({
       // match the focus url to a gif Object, get a bigger gif url from that object
       return (
         <div className="img-div">
-          <img src={this.getBigGif(this.props.focusImage)} className="gif-frame"
+          <img src={this.getBigGif(this.props.focusImage)} className="focus-frame"
             onClick={this.unFocusGif} />
         </div>
       );

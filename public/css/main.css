@@ -26,3 +26,14 @@ input[type=submit] {
   height: 40px;
   width: 250px;
 }
+.focus-frame {
+  border: 2px solid black;
+  margin-top: 50px;
+  margin-left: 50px;
+  box-shadow: 10px 10px 5px #888888;
+}
+.focus-frame:hover{
+  border: 2px solid white;
+  /*margin-left: 5px;*/
+  box-shadow: 10px 10px 5px #888888;
+}
