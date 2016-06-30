@@ -1,8 +1,8 @@
 import React from 'react';
 import GifForm from './gifform.jsx';
 import GifDisplay from './gifdisplay.jsx';
-import AJAX from '../dependency/ajax.js';
-import Giphy from './constants.js';
+import AJAX from './ajax.js';
+import Giphy from './constants/Giphy.js';
 
 export default React.createClass({
   getInitialState : function(){

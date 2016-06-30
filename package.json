@@ -21,6 +21,7 @@
   "dependencies": {
     "express": "^4.13.4",
     "flux": "^2.1.1",
+    "keymirror": "^0.1.1",
     "material-ui": "^0.15.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
