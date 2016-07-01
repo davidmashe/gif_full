@@ -24,9 +24,9 @@ export default React.createClass({
     return (
       <div id="form-div">
         <TextField className="form-component"
-          id="breh" placeholder="search for a gif, bruh" onChange={this.handleKeyDown} />
-        <input className="form-component" id="gif-submit"
-          type="submit" value="GIF IT UP" onClick={this.propagate}/>
+          id="gif-entry" placeholder="search for a gif, bruh" onChange={this.handleKeyDown} />
+        <RaisedButton className="form-component" id="gif-submit"
+          onClick={this.propagate}>GIF IT UP</RaisedButton>
       </div>
     );
   }
