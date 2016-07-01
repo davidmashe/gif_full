@@ -17,22 +17,13 @@ export default React.createClass({
     this.props.propagate(this.state.lastTyped);
   },
   render : function(){
-    // return (
-    //   <form onSubmit={this.propagate}>
-    //     <input className="form-component" id="gif-text"
-    //       type="text" placeholder="search for a gif, bruh" onChange={this.handleClick} />
-    //     <input className="form-component" id="gif-submit"
-    //       type="submit" value="GIF IT UP"/>
-    //   </form>
-    //
-    // );
     return (
       <div id="form-div">
         <TextField className="form-component"
-          id="gif-entry" placeholder="search for a gif, bruh" onKeyDown={this.handleEnter}
+          id="gif-entry" floatingLabelText="search for a gif, bruh" onKeyDown={this.handleEnter}
           onChange={this.handleTyping} />
-        <RaisedButton className="form-component" id="gif-submit"
-          onClick={this.propagate}>GIF IT UP</RaisedButton>
+        <RaisedButton className="form-component" label="GIF IT UP" primary={true} id="gif-submit"
+          onClick={this.propagate} />
       </div>
     );
   }

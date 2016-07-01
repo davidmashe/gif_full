@@ -1,7 +1,7 @@
 .gif-frame {
   border: 2px solid black;
   margin-left: 5px;
-  box-shadow: 10px 10px 5px #888888;
+  box-shadow: 10px 10px 5px #888888; 
 }
 .gif-frame:hover{
   border: 2px solid white;
@@ -39,7 +39,4 @@ input[type=submit] {
 }
 #gif-entry{
 
-}
-#gif-submit{
-  margin-left: 20px;
 }
