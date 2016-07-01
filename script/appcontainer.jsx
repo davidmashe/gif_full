@@ -3,7 +3,7 @@ import GifForm from './gifform.jsx';
 import GifDisplay from './gifdisplay.jsx';
 import AJAX from './ajax.js';
 import Giphy from './constants/Giphy.js';
-import GifStore from('../stores/GifStore.js');
+import GifStore from './stores/GifStore.js';
 
 function getGifState() {
   return {
