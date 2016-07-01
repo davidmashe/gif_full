@@ -3,7 +3,6 @@ import GifForm from './gifform.jsx';
 import GifDisplay from './gifdisplay.jsx';
 import AJAX from './ajax.js';
 import Giphy from './constants.js';
-import {RaisedButton, TextField} from 'material-ui';
 
 
 export default React.createClass({
@@ -17,8 +16,8 @@ export default React.createClass({
       focusImage:null
     };
   },
-  makeApiCall : function(stateObject){
-    var searchTerm = stateObject.searched.split(" ").join("+"); // make the search term URL friendly
+  makeApiCall : function(string){
+    var searchTerm = string.split(" ").join("+"); // make the search term URL friendly
     var url = Giphy.prefix + searchTerm + Giphy.suffix;
     AJAX.get(url,this.onGiphyResponse);
   },
@@ -51,7 +50,7 @@ export default React.createClass({
   render : function(){
       return (
         <div>
-          <TextField id="breh" placeholder="type for fun" />
+
           <GifForm propagate={this.makeApiCall} />
           <GifDisplay images={this.state.previewImages} focusImage={this.state.focusImage}
             propagateImageClick={this.focusImage} imageObjects={this.state.imageObjects}

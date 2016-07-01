@@ -1,25 +1,33 @@
 import React from 'react';
+import {RaisedButton, TextField} from 'material-ui';
 
 export default React.createClass({
   getInitialState : function() {
-    return {lastSearched:""};
+    return {lastTyped:""};
   },
-  handleClick : function(event){
-    this.setState({lastSearched:event.target.value});
+  handleKeyDown : function(event){
+    this.setState({lastTyped:event.target.value});
   },
   propagate: function(event){
-    event.preventDefault(); // forms want to reload the page on submit, that's a no-no for us
-    this.props.propagate({searched:this.state.lastSearched});
+    this.props.propagate(this.state.lastTyped);
   },
   render : function(){
+    // return (
+    //   <form onSubmit={this.propagate}>
+    //     <input className="form-component" id="gif-text"
+    //       type="text" placeholder="search for a gif, bruh" onChange={this.handleClick} />
+    //     <input className="form-component" id="gif-submit"
+    //       type="submit" value="GIF IT UP"/>
+    //   </form>
+    //
+    // );
     return (
-      <form onSubmit={this.propagate}>
-        <input className="form-component" id="gif-text"
-          type="text" placeholder="search for a gif, bruh" onChange={this.handleClick} />
+      <div id="form-div">
+        <TextField className="form-component"
+          id="breh" placeholder="search for a gif, bruh" onChange={this.handleKeyDown} />
         <input className="form-component" id="gif-submit"
-          type="submit" value="GIF IT UP"/>
-      </form>
-
+          type="submit" value="GIF IT UP" onClick={this.propagate}/>
+      </div>
     );
   }
 });
