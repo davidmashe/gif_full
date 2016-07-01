@@ -5,8 +5,13 @@ export default React.createClass({
   getInitialState : function() {
     return {lastTyped:""};
   },
-  handleKeyDown : function(event){
+  handleTyping : function(event){
     this.setState({lastTyped:event.target.value});
+  },
+  handleEnter : function(event){
+    if (event.keyCode === 13) {
+      this.props.propagate(this.state.lastTyped);
+    }
   },
   propagate: function(event){
     this.props.propagate(this.state.lastTyped);
@@ -24,7 +29,8 @@ export default React.createClass({
     return (
       <div id="form-div">
         <TextField className="form-component"
-          id="gif-entry" placeholder="search for a gif, bruh" onChange={this.handleKeyDown} />
+          id="gif-entry" placeholder="search for a gif, bruh" onKeyDown={this.handleEnter}
+          onChange={this.handleTyping} />
         <RaisedButton className="form-component" id="gif-submit"
           onClick={this.propagate}>GIF IT UP</RaisedButton>
       </div>
