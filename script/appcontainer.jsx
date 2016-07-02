@@ -2,19 +2,25 @@ import React from 'react';
 import GifForm from './gifform.jsx';
 import GifDisplay from './gifdisplay.jsx';
 import AJAX from './ajax.js';
-import Giphy from './constants.js';
+import Giphy from './constants/Giphy.js';
+import GifStore from './stores/GifStore.js';
 
+function getGifState() {
+  return {
+    imageObjects: GifStore.getImageObjects(),
+    focusImage: GifStore.getFocusImage()
+  };
+}
 
 export default React.createClass({
   getInitialState : function(){
-    return {
-      imageObjects : [{
-        images:{
-          fixed_height:{url: Giphy.previewImage}
-        }
-      }],
-      focusImage:null
-    };
+    return getGifState();
+  },
+  componentDidMount: function() {
+    GifStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    GifStore.removeChangeListener(this._onChange);
   },
   makeApiCall : function(string){
     var searchTerm = string.split(" ").join("+"); // make the search term URL friendly
@@ -57,5 +63,8 @@ export default React.createClass({
             unFocusImage={this.unFocusImage}/>
         </div>
       );
+  },
+  _onChange: function() {
+    this.setState(getGifState());
   }
 });
