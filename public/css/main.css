@@ -37,3 +37,9 @@ input[type=submit] {
   /*margin-left: 5px;*/
   box-shadow: 10px 10px 5px #888888;
 }
+#gif-entry{
+
+}
+#gif-submit{
+  margin-left: 20px;
+}
