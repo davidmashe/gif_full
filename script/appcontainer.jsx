@@ -17,6 +17,8 @@ export default React.createClass({
     return getGifState();
   },
   componentDidMount: function() {
+    console.log("mounting, state is:");
+    console.log(this.state);
     GifStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
