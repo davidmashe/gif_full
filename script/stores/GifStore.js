@@ -1,8 +1,10 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import GifConstants from ('../constants/constants';
+import Giphy from '../constants/Giphy';
+import assign from 'object-assign';
+import AJAX from './ajax.js';
+
 var EventEmitter = require('events').EventEmitter;
-var GifConstants = require('../constants/constants');
-var Giphy = require('../constants/Giphy');
-var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 
@@ -23,15 +25,49 @@ function setFocus(urlString){
   _state.focusImage = urlString;
 }
 
+var makeApiCall = function(string){
+  GifActions.search(string);
+  var searchTerm = string.split(" ").join("+");
+  var url = Giphy.prefix + searchTerm + Giphy.suffix;
+  AJAX.get(url,onGiphyResponse);
+};
 
-var TodoStore = assign({}, EventEmitter.prototype, {
+var focusImage = function(imageUrl){
+  var targetedObject = null;
+  var list = this.state.imageObjects;
+  for (var i = 0; i < list.length; i++) {
+    if (getUrl(list[i]) === imageUrl){
+      targetedObject = list[i];
+    }
+  }
 
-  // begin object modification
+  this.setFocus(targetedObject);
+};
 
-  // end modification
+var getUrl = function(object){
+  return object.images.fixed_height.url;
+};
+
+var unFocusImage = function(){
+  this.setState({imageObjects:this.state.imageObjects,focusImage:null}); // TODO - fix
+};
+
+var onGiphyResponse = function(response){
+  var resultsArray = JSON.parse(response).data;
+  var displayArray = [];
+  var maxIterations = resultsArray.length > 5 ? 5 : resultsArray.length;
+  for (var i = 0; i < maxIterations; i++) {
+    displayArray.push(resultsArray[i]);
+  }
+  this.setState({imageObjects:displayArray,focusImage:null}); // TODO - fix
+  TodoStore.emitChange();
+};
+
+
+var GifStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
-    console.log("emit method belongs to",this);
+    console.log("Gif Store emitting change");
     this.emit(CHANGE_EVENT);
   },
 
@@ -50,12 +86,6 @@ var TodoStore = assign({}, EventEmitter.prototype, {
   getFocusImage : function(){
     return _state.focusImage;
   },
-
-  makeApiCall : function(){
-    var searchTerm = string.split(" ").join("+");
-    var url = Giphy.prefix + searchTerm + Giphy.suffix;
-    AJAX.get(url,this.onGiphyResponse);
-  }
 });
 
 // Register callback to handle all updates
@@ -66,17 +96,21 @@ AppDispatcher.register(function(action) {
   if(action.actionType === GifConstants.GIF_SEARCH) {
       searched = action.searched.trim();
       if (searched !== '') {
-        setResults(searched);
-        GifStore.emitChange();
+        // TODO - make API call
+        // setResults(searched);
+        // GifStore.emitChange();
       }
   }
   else if (action.actionType ===  GifConstants.GIF_FOCUS){
     focusImage = action.focusImage.trim();
     if (focusImage !== '') {
-      setFocus(focusImage);
+      // TODO - call the right method above to grab object based on focusImage
+      // setFocus(focusImage);
       GifStore.emitChange();
     }
+  } else if (action.actionType ===  GifConstants.GIF_UNFOCUS){
+
   }
 });
 
-module.exports = TodoStore;
+module.exports = GifStore;

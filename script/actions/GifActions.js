@@ -1,22 +1,25 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher.js');
-var GifConstants = require('../constants/constants.js');
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import GifConstants from '../constants/constants';
 
 var GifActions = {
 
-  search : function(searchTerm){
-    GifConstants.dispatch({
+  search: function(searchText) {
+    AppDispatcher.dispatch({
       actionType: GifConstants.GIF_SEARCH,
-      searched: searchTerm
+      searched: searchText
     });
   },
-  focus : function(url){
-    GifConstants.dispatch({
+  focus : function(string) {
+    AppDispatcher.dispatch({
       actionType: GifConstants.GIF_FOCUS,
-      focusImage: url
+      focusImage: string
+    });
+  },
+  unFocus : function() {
+    AppDispatcher.dispatch({
+      actionType: GifConstants.GIF_UNFOCUS
     });
   }
-
-
 
 };
 
