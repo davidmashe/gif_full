@@ -49,6 +49,12 @@ var TodoStore = assign({}, EventEmitter.prototype, {
 
   getFocusImage : function(){
     return _state.focusImage;
+  },
+
+  makeApiCall : function(){
+    var searchTerm = string.split(" ").join("+");
+    var url = Giphy.prefix + searchTerm + Giphy.suffix;
+    AJAX.get(url,this.onGiphyResponse);
   }
 });
 

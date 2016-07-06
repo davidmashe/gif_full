@@ -25,9 +25,10 @@ export default React.createClass({
     GifStore.removeChangeListener(this._onChange);
   },
   makeApiCall : function(string){
-    var searchTerm = string.split(" ").join("+"); // make the search term URL friendly
-    var url = Giphy.prefix + searchTerm + Giphy.suffix;
-    AJAX.get(url,this.onGiphyResponse);
+    GifActions.search(string);
+    // var searchTerm = string.split(" ").join("+");
+    // var url = Giphy.prefix + searchTerm + Giphy.suffix;
+    // AJAX.get(url,this.onGiphyResponse);
   },
   focusImage : function(imageUrl){
     var targetedObject = null;
@@ -67,6 +68,7 @@ export default React.createClass({
       );
   },
   _onChange: function() {
+    console.log("fired _onChange");
     this.setState(getGifState());
   }
 });
