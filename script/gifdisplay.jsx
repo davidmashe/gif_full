@@ -8,6 +8,7 @@ export default React.createClass({
   //   return {images:this.props.images};
   // },
   handleImageClick : function(event) {
+    console.log("gif display is sending along this image:",event.target.src);
     this.props.propagateImageClick(event.target.src);
   },
   unFocusGif : function(){
@@ -29,7 +30,7 @@ export default React.createClass({
         </div>
       );
     } else {
-      console.log("gifdisplay is showing five images");
+      console.log("gifdisplay is showing five images:",this.props.imageObjects);
       return (
         <div className="img-div">
           {this.props.imageObjects.map((currentValue,index,originalArray)=> {
