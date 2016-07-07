@@ -1,7 +1,7 @@
 .gif-frame {
   border: 2px solid black;
   margin-left: 5px;
-  box-shadow: 10px 10px 5px #888888; 
+  box-shadow: 10px 10px 5px #888888;
 }
 .gif-frame:hover{
   border: 2px solid white;
@@ -37,6 +37,20 @@ input[type=submit] {
   /*margin-left: 5px;*/
   box-shadow: 10px 10px 5px #888888;
 }
-#gif-entry{
+.example-enter {
+  opacity: 0.01;
+}
 
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 2000ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
 }
