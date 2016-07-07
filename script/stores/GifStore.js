@@ -1,8 +1,8 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import GifConstants from ('../constants/constants';
+import GifConstants from '../constants/constants';
 import Giphy from '../constants/Giphy';
 import assign from 'object-assign';
-import AJAX from './ajax.js';
+import AJAX from '../ajax.js';
 
 var EventEmitter = require('events').EventEmitter;
 
@@ -18,7 +18,7 @@ var _state = {
 };
 
 function setResults(input) {
-  _state.imageobjects = input;
+  _state.imageObjects = input;
 }
 
 function setFocus(urlString){
@@ -26,22 +26,20 @@ function setFocus(urlString){
 }
 
 var makeApiCall = function(string){
-  GifActions.search(string);
   var searchTerm = string.split(" ").join("+");
   var url = Giphy.prefix + searchTerm + Giphy.suffix;
   AJAX.get(url,onGiphyResponse);
 };
 
-var focusImage = function(imageUrl){
+var focusImageFromObject = function(imageUrl){
   var targetedObject = null;
-  var list = this.state.imageObjects;
+  var list = _state.imageObjects;
   for (var i = 0; i < list.length; i++) {
     if (getUrl(list[i]) === imageUrl){
       targetedObject = list[i];
     }
   }
-
-  this.setFocus(targetedObject);
+  setFocus(targetedObject);
 };
 
 var getUrl = function(object){
@@ -49,7 +47,8 @@ var getUrl = function(object){
 };
 
 var unFocusImage = function(){
-  this.setState({imageObjects:this.state.imageObjects,focusImage:null}); // TODO - fix
+  _state.focusImage =null;
+  emitChange();
 };
 
 var onGiphyResponse = function(response){
@@ -59,8 +58,9 @@ var onGiphyResponse = function(response){
   for (var i = 0; i < maxIterations; i++) {
     displayArray.push(resultsArray[i]);
   }
-  this.setState({imageObjects:displayArray,focusImage:null}); // TODO - fix
-  TodoStore.emitChange();
+  setResults(displayArray);
+  setFocus(null);
+  GifStore.emitChange();
 };
 
 
@@ -94,22 +94,23 @@ AppDispatcher.register(function(action) {
   var focusImage;
 
   if(action.actionType === GifConstants.GIF_SEARCH) {
-      searched = action.searched.trim();
+      console.log("GifStore received as search term:",action.searched);
+      searched = action.searched.searched.trim();
       if (searched !== '') {
-        // TODO - make API call
-        // setResults(searched);
-        // GifStore.emitChange();
+        console.log("GifStore about to make api call");
+        makeApiCall(searched);
       }
   }
   else if (action.actionType ===  GifConstants.GIF_FOCUS){
     focusImage = action.focusImage.trim();
+    console.log("GifStore received as focusImage:",focusImage);
     if (focusImage !== '') {
-      // TODO - call the right method above to grab object based on focusImage
-      // setFocus(focusImage);
+      focusImageFromObject(focusImage);
       GifStore.emitChange();
     }
   } else if (action.actionType ===  GifConstants.GIF_UNFOCUS){
-
+    setFocus(null);
+    GifStore.emitChange();
   }
 });
 

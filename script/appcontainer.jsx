@@ -3,6 +3,7 @@ import GifForm from './gifform.jsx';
 import GifDisplay from './gifdisplay.jsx';
 //import AJAX from './ajax.js';
 //import Giphy from './constants/Giphy.js';
+import GifActions from './actions/GifActions.js';
 import GifStore from './stores/GifStore.js';
 
 function getGifState() {
@@ -17,8 +18,7 @@ export default React.createClass({
     return getGifState();
   },
   componentDidMount: function() {
-    console.log("mounting, state is:");
-    console.log(this.state);
+    console.log("mounting, state is:",this.state);
     // GifStore can listen for change, then call given callback reference
     GifStore.addChangeListener(this._onChange);
   },
@@ -29,11 +29,15 @@ export default React.createClass({
     GifActions.search(string);
   },
   focusImage : function(imageUrl){
+    console.log("about to send focus action with this image:",imageUrl);
     GifActions.focus(imageUrl);
   },
   _onChange: function() {
     console.log("fired _onChange");
     this.setState(getGifState());
+  },
+  unFocusImage : function(){
+    GifActions.unFocus();
   },
   // makeApiCall : function(string){
   //   var searchTerm = string.split(" ").join("+");
@@ -54,9 +58,7 @@ export default React.createClass({
   // getUrl : function(object){
   //   return object.images.fixed_height.url;
   // },
-  // unFocusImage : function(){
-  //   this.setState({imageObjects:this.state.imageObjects,focusImage:null});
-  // },
+
   // onGiphyResponse : function(response){
   //   var resultsArray = JSON.parse(response).data;
   //   var displayArray = [];
@@ -67,6 +69,7 @@ export default React.createClass({
   //   this.setState({imageObjects:displayArray,focusImage:null});
   // },
   render : function(){
+    console.log("State @ render is:",this.state);
       return (
         <div>
           <GifForm propagate={this.makeApiCall} />
